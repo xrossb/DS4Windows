@@ -901,10 +901,12 @@ namespace DS4Windows
                     cState = MappedState[ind];
                 }
 
-                if (!useDInputOnly[ind])
+                Xbox360Controller tempCtrl = x360controls[ind];
+                if (!useDInputOnly[ind] && tempCtrl != null)
                 {
-                    testNewReport(ref x360reports[ind], cState);
-                    x360controls[ind]?.SendReport(x360reports[ind]);
+                    Xbox360Report report = x360reports[ind];
+                    testNewReport(ref report, cState);
+                    tempCtrl.SendReport(report);
                     //x360Bus.Parse(cState, processingData[ind].Report, ind);
                     // We push the translated Xinput state, and simultaneously we
                     // pull back any possible rumble data coming from Xinput consumers.
